@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  # Sito    
+  php:
+    image: php:8.2-apache
+    container_name: professore_php
+    environment:
+      - PASSWORD=${PASSWORD}
+    ports:
+      - "82:80"
+    volumes:
+      - ./php:/var/www/html
+      - ./files:/files
+    restart: always
+  sim:
+    build: sim
+    container_name: professore_similarity
+    environment:
+      - PASSWORD=${PASSWORD}
+    ports:
+      - "83:5000"
+    volumes:
+      - ./sim:/app
+      - ./files:/files
